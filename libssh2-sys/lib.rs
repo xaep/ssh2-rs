@@ -3,10 +3,6 @@
 
 extern crate libc;
 
-extern crate libz_sys;
-#[cfg(unix)]
-extern crate openssl_sys;
-
 use libc::{c_int, size_t, c_void, c_char, c_long, c_uchar, c_uint, c_ulong};
 use libc::ssize_t;
 
@@ -212,6 +208,7 @@ pub type LIBSSH2_PASSWD_CHANGEREQ_FUNC = extern fn(sess: *mut LIBSSH2_SESSION,
 #[cfg(unix)]    pub type libssh2_socket_t = c_int;
 #[cfg(windows)] pub type libssh2_socket_t = libc::SOCKET;
 
+#[link(name="ssh2")]
 extern {
     // misc
     pub fn libssh2_init(flag: c_int) -> c_int;
